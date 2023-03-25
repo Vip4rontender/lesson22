@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lesson 21</title>
+  </head>
+  <body>
+    <script>
+      // Task 1
+
+      let car = {
+        model: "F1",
+        year: 1990,
+        color: "red",
+      };
+
+      console.log(car);
+
+      car.color = "black";
+      car.type = "petrol";
+      car.signal = function () {
+        alert(`fa! fa!`);
+      };
+
+      console.log(car);
+      car.signal();
+
+      // Task 2
+
+      let salaries = {
+        frontend: 12000,
+        backend: 10000,
+        designer: 8000,
+        daPay() {
+          alert("We must pay salary on Tuesday!");
+        },
+        total() {
+          let sum = 0;
+          for (let key in salaries) {
+            if (typeof this[key] === "number") {
+              sum += this[key];
+            }
+            console.log(sum);
+          }
+        },
+      };
+
+      salaries.total();
+
+      salaries.manager = 5000;
+      delete salaries.designer;
+
+      salaries.total();
+
+      // Task 3 - 4
+
+      function CompanyComparison(brand, system, cost) {
+        this.brand = brand;
+        this.system = system;
+        this.cost = cost;
+        this[Symbol.toPrimitive] = function (hint) {
+          switch (hint) {
+            case "string":
+              return this.brand;
+            case "number":
+              return this.cost;
+            case "default":
+              return `// ${this.brand} ${this.system} ${this.cost} //`;
+          }
+        };
+      }
+
+      let dell = new CompanyComparison("Dell", "windows", 800);
+      let apple = new CompanyComparison("Apple", "MAC OS", 1700);
+
+      console.log(String(dell));
+      console.log(+apple);
+      console.log(dell + apple);
+    </script>
+  </body>
+</html>
